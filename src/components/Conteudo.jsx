@@ -1,4 +1,7 @@
+import reactLogo from "../assets/react.svg"
+
 export default function Conteudo() {
+  let reactLogoAlt = "React Logo"
     return (
       <>
         <section>
@@ -21,7 +24,7 @@ export default function Conteudo() {
               consequuntur maiores! Nam vero delectus rerum perspiciatis
               architecto quae beatae voluptates?
             </p>
-            <img src="./assets/react.svg" alt="Logo React" />
+            <img src={reactLogo} alt={reactLogoAl} />
           </div>
         </section>
       </>
