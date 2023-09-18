@@ -2,7 +2,7 @@ export default function Cabecalho() {
     return (
       <>
         <header>
-          <h1>Vite+React coded by - PF0670</h1>
+          <h1>Vite+React coded by - RM98952</h1>
           <nav>
             <ul>
               <li>Item-1</li>
