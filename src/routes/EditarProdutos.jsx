@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 export default function EditarProdutos (){
 
-    document.title = "Editar Produtos";
+    document.title = "Editar Produtos" + id;
 
     const{id} = useParams()
 
