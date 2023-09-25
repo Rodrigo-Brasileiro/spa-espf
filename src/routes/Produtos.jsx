@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import { ListaProduto } from "../components/ListaProdutos";
-import style from "./Produtos.module.css"
+import style from "./Produtos.module.css";
 
 export default function Produtos() {
   document.title = "Lista de Produtos";
@@ -24,7 +25,7 @@ export default function Produtos() {
               <td>{item.id}</td>
               <td>{item.nome}</td>
               <td>{item.desc}</td>
-              <td>{item.preco}</td>
+              <td><Link to={`/editar/produtos/${item.id}`}>{item.preco}</Link></td>
             </tr>
           ))}
         </tbody>
