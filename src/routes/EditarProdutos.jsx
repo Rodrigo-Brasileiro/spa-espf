@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export default function EditarProdutos() {
 
     const {id} = useParams();
+    const navigation = useNavigate()
 
     document.title = "Editar Produtos " + id; 
 
@@ -29,19 +30,33 @@ export default function EditarProdutos() {
       //Destructuring
       const {name,value} = e.target;
 
-      //Setando os dados diretamente no objeto através de SPREAD
+      //Setando os dados diretamente no objeto atravé de SPREAD
       setProduto({...produto,[name]:value});
-      
       
     }
 
-    
+    const handleSubmit = (e) =>{
+      e.preventDefault();
+   
+        fetch(`http://localhost:5000/produtos/${id}`,{
+          method:"PUT",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body: JSON.stringify(produto)
+        })
+        .then((response)=> console.log("Dados alterado com sucesso - STATUS CODE : " + response.status))
+        .catch(error=> console.log(error));
+
+        //Redirect
+        navigation("/produtos");
+    }
 
   return (
     <div>
         <h1>Editar Produtos</h1>
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <fieldset>
                 <legend>Produto Selecionado</legend>
                 <div>
@@ -67,15 +82,16 @@ export default function EditarProdutos() {
   )
 }
 
-// Segunda forma de INPUT com UseState
-// if(name == "nome"){
-//         setProduto({"nome":value,"desc":produto.desc,"preco":produto.preco});
-//       }else if(name == "desc"){
-//         setProduto({"nome":produto.nome,"desc":value,"preco":produto.preco});
-//       }else if(name == "preco"){
-//         setProduto({"nome":produto.nome,"desc":produto.desc,"preco":value});
-//       }
 
+
+//2ª FORM DE INPUT COM useState
+// if(name == "nome"){
+//   setProduto({"nome":value,"desc":produto.desc,"preco":produto.preco});
+// }else if(name == "desc"){
+//   setProduto({"nome":produto.nome,"desc":value,"preco":produto.preco});
+// }else if(name == "preco"){
+//   setProduto({"nome":produto.nome,"desc":produto.desc,"preco":value});
+// }
 
 // //1ª FORMA DE INPUT COM useState
 // <form>

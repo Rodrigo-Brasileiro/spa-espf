@@ -3,28 +3,37 @@ import { ListaProduto } from "../components/ListaProdutos";
 import style from "./Produtos.module.css";
 import {AiTwotoneEdit as Editar} from "react-icons/ai"
 import { useEffect, useState } from "react";
+import ModalAction from "../components/ModalAction/ModalAction";
 
 export default function Produtos() {
   document.title = "Lista de Produtos";
 
-  const [listaProdutosApi,setListaProdutosApi] = useState([]);
-
+  const[listaProdutosApi,setListaProdutosApi] = useState([]);
 
   useEffect(()=>{
-  //Realizando o Request
-  fetch("http://localhost:5000/produtos")
-  //Recebendo o Response e transformando em json
-  .then((response)=> response.json())
-  //Exibindo os dados no console
-  .then((response)=> setListaProdutosApi(response))
-  //Exibindo caso ocorra algum erro.
-  .catch(error=> console.log(error));
-  },[])
+
+    //Realizando o Request
+    fetch("http://localhost:5000/produtos")
+    //Recebendo o Response e transformando em json
+    .then((response)=> response.json())
+    //Exibindo os dados no console
+    .then((response)=> setListaProdutosApi(response))
+    //Exibindo caso ocorra algum erro.
+    .catch(error=> console.log(error));
+
+  },[]);
   
+  const [open, setOpen] = useState(false);
+
 
   return (
     <div>
       <h1>Produtos</h1>
+
+      <ModalAction open={open} setClose={setOpen}/>
+
+      <button onClick={()=> setOpen(true)}>OPEN-MODAL</button>
+
 
       <table className={style.tblEstilo}>
         <thead>
