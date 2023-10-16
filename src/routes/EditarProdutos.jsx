@@ -29,16 +29,13 @@ export default function EditarProdutos() {
       //Destructuring
       const {name,value} = e.target;
 
-      if(name == "nome"){
-        setProduto({"nome":value,"desc":produto.desc,"preco":produto.preco});
-      }else if(name == "desc"){
-        setProduto({"nome":produto.nome,"desc":value,"preco":produto.preco});
-      }else if(name == "preco"){
-        setProduto({"nome":produto.nome,"desc":produto.desc,"preco":value});
-      }
+      //Setando os dados diretamente no objeto através de SPREAD
+      setProduto({...produto,[name]:value});
+      
       
     }
 
+    
 
   return (
     <div>
@@ -69,6 +66,17 @@ export default function EditarProdutos() {
     </div>
   )
 }
+
+// Segunda forma de INPUT com UseState
+// if(name == "nome"){
+//         setProduto({"nome":value,"desc":produto.desc,"preco":produto.preco});
+//       }else if(name == "desc"){
+//         setProduto({"nome":produto.nome,"desc":value,"preco":produto.preco});
+//       }else if(name == "preco"){
+//         setProduto({"nome":produto.nome,"desc":produto.desc,"preco":value});
+//       }
+
+
 // //1ª FORMA DE INPUT COM useState
 // <form>
 // <fieldset>
