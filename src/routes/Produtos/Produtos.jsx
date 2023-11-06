@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { ListaProduto } from "../components/ListaProdutos";
 import style from "./Produtos.module.css";
 import {AiTwotoneEdit as Editar} from "react-icons/ai"
 import { useEffect, useState } from "react";
-import ModalAction from "../components/ModalAction/ModalAction";
+import ModalAction from "../../components/ModalAction/ModalAction";
 
 export default function Produtos() {
   document.title = "Lista de Produtos";
@@ -25,7 +24,7 @@ export default function Produtos() {
   
   const [open, setOpen] = useState(false);
 
-
+  if(sessionStorage.getItem("token-user")){
   return (
     <div>
       <h1>Produtos</h1>
@@ -33,7 +32,6 @@ export default function Produtos() {
       <ModalAction open={open} setClose={setOpen}/>
 
       <button onClick={()=> setOpen(true)}>OPEN-MODAL</button>
-
 
       <table className={style.tblEstilo}>
         <thead>
@@ -60,11 +58,15 @@ export default function Produtos() {
         <tfoot>
           <tr>
             <td colSpan={5}>
-              PRODUTOS INFORMÁTICOS - QTD = {ListaProduto.length}
+              PRODUTOS INFORMÁTICOS - QTD = {listaProdutosApi.length}
             </td>
           </tr>
         </tfoot>
       </table>
     </div>
   );
+          }else{
+            window.location = "/login";
+            
+          }
 }
