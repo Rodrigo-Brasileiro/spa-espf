@@ -14,16 +14,10 @@ export default function Cabecalho() {
     navigate("/login");
   }
 
-
-  
   return (
     <>
       <header className="cabecalho">
 
-        <div>
-          <p>{obJUser.email}</p>
-          <p>{obJUser.name}</p>
-        </div>
         <div>
           <button onClick={handleLogout} className={sessionStorage.getItem("token-user") ? "btnLogout":"btn"}>Logout</button>
         </div>
@@ -34,7 +28,12 @@ export default function Cabecalho() {
             <li><Link to="/produtos" className={rotaAtual.pathname == "/produtos" ? "active" : ""}>Produtos</Link> </li>
           </ul>
         </nav>
+        <div className="welcome">
+          <p>{obJUser != null ?  obJUser.email :""}</p>
+          <p>{obJUser != null ?  `Olá ${obJUser.name}`:""}</p>
+        </div>
       </header>
     </>
   );
 }
+
